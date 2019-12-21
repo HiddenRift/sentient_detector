@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+  <title>warframe sentient tracker</title>
+</head>
+<body>
+<h1 id="title">Sentient detector</h1>
+<p id="status"></p>
+
+</body>
+<script>
+  const WF_URL = "https://cors-anywhere.herokuapp.com/http://content.warframe.com/dynamic/worldState.php";
+
+  const jqxhr = $.get( WF_URL, function(data) {
+    console.log( "success" );
+    //console.log(data);
+    checkForSentients(JSON.parse(data));
+  })
+  .fail(function() {
+    console.log( "error contactying server" );
+  })
+  .always(function() {
+    console.log( "finished" );
+  });
+
+  function checkForSentients(json){
+    console.log(json);
+    const tmp = json.Tmp;
+    console.log("length: ");
+    if(tmp == "[]") {
+      // no sentients
+      console.log("no sentient presence detected");
+      $("#status").text("no sentient presence detected");
+    }else{
+      // sentients detected, check location
+      console.log("sentients present in veil");
+      $("#status").text("sentients present in veil");
+    }
+    return null;
+  }
+</script>
+</html>
