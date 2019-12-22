@@ -13,6 +13,7 @@
 <body>
 <h1 id="title">Sentient detector</h1>
 <p id="status"></p>
+<p id="location"></p>
 
 </body>
 <script>
@@ -38,10 +39,12 @@
       // no sentients
       console.log("no sentient presence detected");
       $("#status").text("no sentient presence detected");
+      $("#location").text(tmp);
     }else{
       // sentients detected, check location
       console.log("sentients present in veil");
       $("#status").text("sentients present in veil");
+      $("#location").text(tmp);
     }
     return null;
   }
